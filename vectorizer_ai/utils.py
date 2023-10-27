@@ -83,6 +83,8 @@ def validate_param(
             raise ValueError(
                 f"Invalid value: {name}. Valid options are: {', '.join(map(str, options))}"
             )
+    else:
+        raise ValueError(f"Invalid value and options provided for {name}")
 
 
 def validate_hex(name: str, color: str) -> None:

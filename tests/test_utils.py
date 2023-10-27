@@ -33,6 +33,8 @@ class ValidateParamTest(unittest.TestCase):
             validate_param("test_range", 5, (1, 3))
         with self.assertRaises(ValueError):
             validate_param("test_option", "a", ["b", "c", "d"])
+        with self.assertRaises(ValueError):
+            validate_param("test_option", "a", ("b", "c", "d"))
         self.assertIsNone(validate_param("test_range", 2, (1, 3)))
         self.assertIsNone(validate_param("test_option", "b", ["b", "c", "d"]))
 
