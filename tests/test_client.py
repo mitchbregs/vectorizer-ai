@@ -69,7 +69,9 @@ class TestVectorizerAI(unittest.TestCase):
 
         vectorizer = VectorizerAI(api_key="some-api-key")
         vectorizer.mode = "preview"
-        response = vectorizer.vectorize(image_url="http://example.com/image.jpg")
+        response = vectorizer.vectorize(
+            image_url="http://example.com/image.jpg"
+        )
 
         self.assertEqual(response.content, b"some content")
         mock_post.assert_called_once_with(

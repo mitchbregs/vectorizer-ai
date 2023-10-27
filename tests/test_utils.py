@@ -22,7 +22,9 @@ class ParamExistsTest(unittest.TestCase):
     def test_param_exists(self):
         with self.assertRaises(ValueError):
             param_exists(["test1", "test2", "test"], [None, None, None])
-        self.assertIsNone(param_exists(["test1", "test2", "test"], [1, None, None]))
+        self.assertIsNone(
+            param_exists(["test1", "test2", "test"], [1, None, None])
+        )
 
 
 class ValidateParamTest(unittest.TestCase):

@@ -29,7 +29,9 @@ def enforce_types(method):
                 continue  # skip self argument
             expected_type = sig.parameters[name].annotation
             if expected_type is not sig.empty and not isinstance(value, expected_type):
-                raise TypeError(f"Argument {name} must be of type {expected_type}")
+                raise TypeError(
+                    f"Argument {name} must be of type {expected_type}"
+                )
 
         return method(self, *args, **kwargs)
 
@@ -58,7 +60,8 @@ def validate_param(
     ],
 ):
     """
-    Validates that a given parameter is one of the valid options or falls within a specified range.
+    Validates that a given parameter is one of the valid options or falls
+    within a specified range.
 
     Args:
         param (Union[bool, int, float, str]): The parameter to validate.
@@ -66,7 +69,9 @@ def validate_param(
             A list of valid options or a tuple representing a range of valid integers/floats.
 
     Raises:
-        ValueError: If the parameter is not one of the valid options or does not fall within the specified range.
+        ValueError:
+            If the parameter is not one of the valid options or does not fall
+            within the specified range.
     """
     if isinstance(options, tuple) and len(options) == 2:
         # Assume options is a range if it's a tuple of length 2
