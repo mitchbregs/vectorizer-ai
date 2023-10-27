@@ -146,12 +146,32 @@ class TestVectorizerAI(unittest.TestCase):
 
         with self.assertRaises(ValueError) as context:
             vectorizer.vectorize(
+                image_url="http://example.com/image.jpg",
+                output_file_format="test"
+            )
+
+        self.assertEqual(
+            str(context.exception),
+            "Invalid value: output_file_format. Valid options are: svg, eps, pdf, dxf, png",
+        )
+
+    @patch("vectorizer_ai.client.requests.post")
+    def test_vectorize_request_failure_range_input(self, mock_post):
+        mock_response = Mock()
+        mock_response.status_code = 400
+        mock_response.text = "some error"
+        mock_post.return_value = mock_response
+
+        vectorizer = VectorizerAI(api_key="some-api-key")
+
+        with self.assertRaises(ValueError) as context:
+            vectorizer.vectorize(
                 image_url="http://example.com/image.jpg", input_max_pixels=-1
             )
 
         self.assertEqual(
             str(context.exception),
-            "Invalid value: -1. Valid range is: 100 to 2097252",
+            "Invalid value: input_max_pixels. Valid range is: 100 to 2097252",
         )
 
     @patch("vectorizer_ai.client.requests.post")

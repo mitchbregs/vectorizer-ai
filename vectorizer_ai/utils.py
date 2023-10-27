@@ -29,9 +29,7 @@ def enforce_types(method):
                 continue  # skip self argument
             expected_type = sig.parameters[name].annotation
             if expected_type is not sig.empty and not isinstance(value, expected_type):
-                raise TypeError(
-                    f"Argument {name} must be of type {expected_type}"
-                )
+                raise TypeError(f"Argument {name} must be of type {expected_type}")
 
         return method(self, *args, **kwargs)
 
@@ -54,6 +52,7 @@ def param_exists(names: list, params: list):
 
 
 def validate_param(
+    name: str,
     param: Union[bool, int, float, str],
     options: Union[
         List[Union[bool, int, float, str]], Tuple[Union[int, float], Union[int, float]]
@@ -64,6 +63,7 @@ def validate_param(
     within a specified range.
 
     Args:
+        name (str): The name of the parameter to validate.
         param (Union[bool, int, float, str]): The parameter to validate.
         options (Union[List[Union[bool, int, float, str]], Tuple[Union[int, float], Union[int, float]]]):
             A list of valid options or a tuple representing a range of valid integers/floats.
@@ -77,21 +77,20 @@ def validate_param(
         # Assume options is a range if it's a tuple of length 2
         start, end = options
         if param and not (start <= param <= end):
-            raise ValueError(
-                f"Invalid value: {param}. Valid range is: {start} to {end}"
-            )
+            raise ValueError(f"Invalid value: {name}. Valid range is: {start} to {end}")
     elif isinstance(options, list):
         if param not in options:
             raise ValueError(
-                f"Invalid value: {param}. Valid options are: {', '.join(map(str, options))}"
+                f"Invalid value: {name}. Valid options are: {', '.join(map(str, options))}"
             )
 
 
-def validate_hex(color: str) -> None:
+def validate_hex(name: str, color: str) -> None:
     """
     Validates a hexadecimal color code.
 
     Args:
+        name (str): The name of the parameter.
         color (str): The color code to validate.
 
     Raises:
@@ -99,4 +98,4 @@ def validate_hex(color: str) -> None:
     """
     pattern = re.compile(r"^#[0-9a-fA-F]{6}$")
     if not pattern.match(color):
-        raise ValueError(f"Invalid hex color code: {color}")
+        raise ValueError(f"Invalid value: {name}. Hex color code provided: {color}")

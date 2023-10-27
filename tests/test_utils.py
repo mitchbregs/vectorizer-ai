@@ -30,17 +30,17 @@ class ParamExistsTest(unittest.TestCase):
 class ValidateParamTest(unittest.TestCase):
     def test_validate_param(self):
         with self.assertRaises(ValueError):
-            validate_param(5, (1, 3))
+            validate_param("test_range", 5, (1, 3))
         with self.assertRaises(ValueError):
-            validate_param("a", ["b", "c", "d"])
-        self.assertIsNone(validate_param(2, (1, 3)))
-        self.assertIsNone(validate_param("b", ["b", "c", "d"]))
+            validate_param("test_option", "a", ["b", "c", "d"])
+        self.assertIsNone(validate_param("test_range", 2, (1, 3)))
+        self.assertIsNone(validate_param("test_option", "b", ["b", "c", "d"]))
 
 
 class ValidateHexTest(unittest.TestCase):
     def test_validate_hex(self):
         with self.assertRaises(ValueError):
-            validate_hex("invalid")
+            validate_hex("test_hex", "invalid")
         with self.assertRaises(ValueError):
-            validate_hex("#ZZZZZZ")
-        self.assertIsNone(validate_hex("#FFFFFF"))
+            validate_hex("test_hex", "#ZZZZZZ")
+        self.assertIsNone(validate_hex("test_hex", "#FFFFFF"))
