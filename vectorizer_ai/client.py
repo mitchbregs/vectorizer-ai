@@ -17,6 +17,7 @@ class VectorizerAIException(Exception):
     Attributes:
         message (str): The message of the exception.
     """
+
     def __init__(self, message):
         self.message = message
         super().__init__(self.message)
@@ -29,10 +30,11 @@ class VectorizerAIResponse(bytes):
     Attributes:
         content (bytes): The content of the response.
     """
+
     def __init__(self, content):
         """
         Initializes a new instance of the VectorizerAIResponse class.
-        
+
         Args:
             content (bytes): The content of the response.
         """
@@ -47,7 +49,7 @@ class VectorizerAIResponse(bytes):
             A string representation of the response.
         """
         return f"bytes:`VectorizerAIResponse`"
-    
+
     def __str__(self):
         """
         String representation of the response.
@@ -71,14 +73,15 @@ class VectorizerAIResponse(bytes):
 class VectorizerAI:
     """
     A class to interact with the Vectorizer.ai API for vectorizing images.
-    
+
     Attributes:
         api_key (str): The API key to authenticate with the Vectorizer.ai API.
         mode (str): The mode in which to run the API, one of 'production', 'preview', or 'test'.
-        
+
     Methods:
         vectorize: Vectorize the given image according to the specified parameters.
     """
+
     def __init__(
         self,
         api_key: str,
@@ -86,12 +89,12 @@ class VectorizerAI:
     ):
         """
         Initializes a new instance of the VectorizerAI class.
-        
+
         Args:
             api_key (str): The API key to authenticate with the Vectorizer.ai API.
-            mode (str, optional): The mode in which to run the API. 
+            mode (str, optional): The mode in which to run the API.
                 One of 'production', 'preview', or 'test'. Defaults to 'production'.
-                
+
         Raises:
             ValueError: If the mode is not one of 'production', 'preview', or 'test'.
         """
@@ -142,15 +145,15 @@ class VectorizerAI:
     ):
         """
         Vectorize the given image according to the specified parameters.
-        
+
         Args:
-            image_path (str, optional): The path to the image file to be vectorized. 
+            image_path (str, optional): The path to the image file to be vectorized.
                 Defaults to an empty string.
-            image_base64 (str, optional): The base64 encoded string of the image to be vectorized. 
+            image_base64 (str, optional): The base64 encoded string of the image to be vectorized.
                 Defaults to an empty string.
-            image_url (str, optional): The URL of the image to be vectorized. 
+            image_url (str, optional): The URL of the image to be vectorized.
                 Defaults to an empty string.
-            input_max_pixels (int, optional): The maximum number of pixels in the input image. 
+            input_max_pixels (int, optional): The maximum number of pixels in the input image.
                 Defaults to 2097252.
             processing_max_colors (int, optional): The maximum number of colors to use in the output image.
                 Defaults to 0.
@@ -218,18 +221,18 @@ class VectorizerAI:
                 Defaults to None.
             output_size_output_dpi (Union[float, None], optional): The output DPI of the output image.
                 Defaults to None.
-            
+
         Raises:
             TypeError: If the type of any of the parameters is invalid.
             ValueError: If any of the parameters are invalid.
             VectorizerAIException: If the request to the Vectorizer.ai API fails.
-            
+
         Returns:
             VectorizerAIResponse: An object containing the vectorized result.
         """
         param_exists(
             ["image_path", "image_base64", "image_url"],
-            [image_path, image_base64, image_url]
+            [image_path, image_base64, image_url],
         )
 
         validate_param(input_max_pixels, (100, 2097252))
@@ -283,24 +286,42 @@ class VectorizerAI:
             "output.file_format": output_file_format,
             "output.svg.version": output_svg_version,
             "output.svg.fixed_size": str(output_svg_fixed_size).lower(),
-            "output.svg.adobe_compatibility_mode": str(output_svg_adobe_compatibility_mode).lower(),
+            "output.svg.adobe_compatibility_mode": str(
+                output_svg_adobe_compatibility_mode
+            ).lower(),
             "output.dxf.compatibility_level": output_dxf_compatibility_level,
             "output.bitmap.anti_aliasing_mode": output_bitmap_anti_aliasing_mode,
             "output.draw_style": output_draw_style,
             "output.shape_stacking": output_shape_stacking,
             "output.group_by": output_group_by,
-            "output.parameterized_shapes.flatten": str(output_parameterized_shapes_flatten).lower(),
-            "output.curves.allowed.quadratic_bezier": str(output_curves_allowed_quadratic_bezier).lower(),
-            "output.curves.allowed.cubic_bezier": str(output_curves_allowed_cubic_bezier).lower(),
-            "output.curves.allowed.circular_arc": str(output_curves_allowed_circular_arc).lower(),
-            "output.curves.allowed_elliptical_arc": str(output_curves_allowed_elliptical_arc).lower(),
+            "output.parameterized_shapes.flatten": str(
+                output_parameterized_shapes_flatten
+            ).lower(),
+            "output.curves.allowed.quadratic_bezier": str(
+                output_curves_allowed_quadratic_bezier
+            ).lower(),
+            "output.curves.allowed.cubic_bezier": str(
+                output_curves_allowed_cubic_bezier
+            ).lower(),
+            "output.curves.allowed.circular_arc": str(
+                output_curves_allowed_circular_arc
+            ).lower(),
+            "output.curves.allowed_elliptical_arc": str(
+                output_curves_allowed_elliptical_arc
+            ).lower(),
             "output.curves.line_fit_tolerance": output_curves_line_fit_tolerance,
             "output.gap_filler.enabled": str(output_gap_filler_enabled).lower(),
             "output.gap_filler.clip": str(output_gap_filler_clip).lower(),
-            "output.gap_filler.non_scaling_stroke": str(output_gap_filler_non_scaling_stroke).lower(),
+            "output.gap_filler.non_scaling_stroke": str(
+                output_gap_filler_non_scaling_stroke
+            ).lower(),
             "output.gap_filler.stroke_width": output_gap_filler_stroke_width,
-            "output.strokes.non_scaling_stroke": str(output_strokes_non_scaling_stroke).lower(),
-            "output.strokes.use_override_color": str(output_strokes_use_override_color).lower(),
+            "output.strokes.non_scaling_stroke": str(
+                output_strokes_non_scaling_stroke
+            ).lower(),
+            "output.strokes.use_override_color": str(
+                output_strokes_use_override_color
+            ).lower(),
             "output.strokes.override_color": output_strokes_override_color,
             "output.strokes.stroke_width": output_strokes_stroke_width,
             "output.size.scale": output_size_scale,
@@ -328,4 +349,3 @@ class VectorizerAI:
             raise VectorizerAIException(message=response.text)
 
         return VectorizerAIResponse(response.content)
-  

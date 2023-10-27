@@ -6,7 +6,7 @@ from typing import List, Tuple, Union
 
 def enforce_types(method):
     """
-A decorator that enforces type annotations on the arguments of a method.
+    A decorator that enforces type annotations on the arguments of a method.
 
     Args:
         method: The method to be decorated.
@@ -92,6 +92,6 @@ def validate_hex(color: str) -> None:
     Raises:
         ValueError: If the color code is not a valid hexadecimal color code.
     """
-    pattern = re.compile(r'^#[0-9a-fA-F]{6}$')
+    pattern = re.compile(r"^#[0-9a-fA-F]{6}$")
     if not pattern.match(color):
         raise ValueError(f"Invalid hex color code: {color}")

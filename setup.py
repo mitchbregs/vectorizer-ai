@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="vectorizer_ai",
-    version="1.0.0",
+    version="1.0.1",
     python_requires=">3.6",
     packages=find_packages(),
     install_requires=[
@@ -10,7 +10,7 @@ setup(
     ],
     author="Mitchell Bregman",
     author_email="mitch@mitchbregs.com",
-    description="Python SDK for vectorizer.ai", 
+    description="Python SDK for vectorizer.ai",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     keywords="vectorizer.ai svg vectorize image",
