@@ -6,7 +6,7 @@ from typing import List, Tuple, Union
 
 def enforce_types(method):
     """
-    A decorator that enforces type annotations on the arguments of a method.
+A decorator that enforces type annotations on the arguments of a method.
 
     Args:
         method: The method to be decorated.
