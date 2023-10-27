@@ -10,7 +10,9 @@ setup(
     ],
     author="Mitchell Bregman",
     author_email="mitch@mitchbregs.com",
-    description="Python SDK for vectorizer.ai",
+    description="Python SDK for vectorizer.ai", 
+    long_description=open("README.md").read(),
+    long_description_content_type="text/markdown",
     keywords="vectorizer.ai svg vectorize image",
     url="https://github.com/mitchbregs/vectorizer-ai",
     classifiers=[
