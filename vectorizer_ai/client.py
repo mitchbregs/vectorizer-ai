@@ -75,7 +75,10 @@ class VectorizerAI:
     A class to interact with the Vectorizer.ai API for vectorizing images.
 
     Attributes:
-        api_key (str): The API key to authenticate with the Vectorizer.ai API.
+        api_id (str):
+            The API ID to authenticate with the Vectorizer.ai API.
+        api_secret (str):
+            The API secret to authenticate with the Vectorizer.ai API.
         mode (str):
             The mode in which to run the API.
             One of 'production', 'preview', or 'test'.
