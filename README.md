@@ -19,7 +19,11 @@ $ pip install vectorizer-ai
 ```python
 from vectorizer_ai import VectorizerAI
 
-client = VectorizerAI(api_key="VECTORIZER-AI-API-KEY", mode="production")
+client = VectorizerAI(
+    api_id="VECTORIZER-AI-API-ID",
+    api_secret="VECTORIZER-AI-API-SECRET",
+    mode="production"
+)
 svg = client.vectorize("/path/to/input.png")
 
 svg.save("/path/to/output.svg")

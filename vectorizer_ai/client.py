@@ -87,15 +87,18 @@ class VectorizerAI:
 
     def __init__(
         self,
-        api_key: str,
+        api_id: str,
+        api_secret: str,
         mode: str = "production",
     ):
         """
         Initializes a new instance of the VectorizerAI class.
 
         Args:
-            api_key (str):
-                The API key to authenticate with the Vectorizer.ai API.
+            api_id (str, optional):
+                The API ID to authenticate with the Vectorizer.ai API.
+            api_secret (str, optional):
+                The API secret to authenticate with the Vectorizer.ai API.
             mode (str, optional):
                 The mode in which to run the API.
                 One of 'production', 'preview', or 'test'.
@@ -105,7 +108,8 @@ class VectorizerAI:
             ValueError:
                 If the mode is not one of 'production', 'preview', or 'test'.
         """
-        self.api_key = api_key
+        self.api_id = api_id
+        self.api_secret = api_secret
         validate_param("mode", mode, ["production", "preview", "test"])
         self.mode = mode
 
@@ -448,7 +452,6 @@ class VectorizerAI:
             "output.size.input_dpi": output_size_input_dpi,
             "output.size.output_dpi": output_size_output_dpi,
         }
-        headers = {"Authorization": f"Basic {self.api_key}"}
 
         if image_path:
             files = {"image": open(image_path, "rb")}
@@ -457,7 +460,12 @@ class VectorizerAI:
         elif image_url:
             data.update({"image.url": image_url})
 
-        response = requests.post(url, data=data, files=files, headers=headers)
+        response = requests.post(
+            url,
+            data=data,
+            files=files,
+            auth=(self.api_id, self.api_secret)
+        )
 
         if not response.status_code == requests.codes.ok:
             raise VectorizerAIException(message=response.text)

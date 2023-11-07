@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="vectorizer_ai",
-    version="1.0.4",
+    version="2.0.0",
     python_requires=">3.6",
     packages=find_packages(),
     install_requires=[

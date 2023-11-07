@@ -12,7 +12,11 @@ class TestVectorizerAI(unittest.TestCase):
         mock_response.content = b"some content"
         mock_post.return_value = mock_response
 
-        vectorizer = VectorizerAI(api_key="some-api-key", mode="test")
+        vectorizer = VectorizerAI(
+            api_id="some-api-id",
+            api_secret="some-api-secret",
+            mode="test"
+        )
         response = vectorizer.vectorize(image_path="some-image-path.jpg")
 
         self.assertEqual(response.content, b"some content")
@@ -57,7 +61,7 @@ class TestVectorizerAI(unittest.TestCase):
                 "output.size.output_dpi": None,
             },
             files={"image": mock_file()},
-            headers={"Authorization": "Basic some-api-key"},
+            auth=("some-api-id", "some-api-secret"),
         )
 
     @patch("vectorizer_ai.client.requests.post")
@@ -67,7 +71,10 @@ class TestVectorizerAI(unittest.TestCase):
         mock_response.content = b"some content"
         mock_post.return_value = mock_response
 
-        vectorizer = VectorizerAI(api_key="some-api-key")
+        vectorizer = VectorizerAI(
+            api_id="some-api-id",
+            api_secret="some-api-secret",
+        )
         vectorizer.mode = "preview"
         response = vectorizer.vectorize(
             image_url="http://example.com/image.jpg"
@@ -115,7 +122,7 @@ class TestVectorizerAI(unittest.TestCase):
                 "image.url": "http://example.com/image.jpg",
             },
             files={},
-            headers={"Authorization": "Basic some-api-key"},
+            auth=("some-api-id", "some-api-secret"),
         )
 
     @patch("vectorizer_ai.client.requests.post")
@@ -125,8 +132,10 @@ class TestVectorizerAI(unittest.TestCase):
         mock_response.text = "some error"
         mock_post.return_value = mock_response
 
-        vectorizer = VectorizerAI(api_key="some-api-key")
-
+        vectorizer = VectorizerAI(
+            api_id="some-api-id",
+            api_secret="some-api-secret",
+        )
         with self.assertRaises(ValueError) as context:
             vectorizer.vectorize()
 
@@ -142,8 +151,10 @@ class TestVectorizerAI(unittest.TestCase):
         mock_response.text = "some error"
         mock_post.return_value = mock_response
 
-        vectorizer = VectorizerAI(api_key="some-api-key")
-
+        vectorizer = VectorizerAI(
+            api_id="some-api-id",
+            api_secret="some-api-secret",
+        )
         with self.assertRaises(ValueError) as context:
             vectorizer.vectorize(
                 image_url="http://example.com/image.jpg",
@@ -162,8 +173,10 @@ class TestVectorizerAI(unittest.TestCase):
         mock_response.text = "some error"
         mock_post.return_value = mock_response
 
-        vectorizer = VectorizerAI(api_key="some-api-key")
-
+        vectorizer = VectorizerAI(
+            api_id="some-api-id",
+            api_secret="some-api-secret",
+        )
         with self.assertRaises(ValueError) as context:
             vectorizer.vectorize(
                 image_url="http://example.com/image.jpg", input_max_pixels=-1
@@ -181,8 +194,10 @@ class TestVectorizerAI(unittest.TestCase):
         mock_response.text = "some error"
         mock_post.return_value = mock_response
 
-        vectorizer = VectorizerAI(api_key="some-api-key")
-
+        vectorizer = VectorizerAI(
+            api_id="some-api-id",
+            api_secret="some-api-secret",
+        )
         with self.assertRaises(VectorizerAIException) as context:
             vectorizer.vectorize(image_url="http://example.com/image.jpg")
 
