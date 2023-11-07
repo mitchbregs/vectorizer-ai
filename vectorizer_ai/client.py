@@ -98,9 +98,9 @@ class VectorizerAI:
         Initializes a new instance of the VectorizerAI class.
 
         Args:
-            api_id (str, optional):
+            api_id (str):
                 The API ID to authenticate with the Vectorizer.ai API.
-            api_secret (str, optional):
+            api_secret (str):
                 The API secret to authenticate with the Vectorizer.ai API.
             mode (str, optional):
                 The mode in which to run the API.
