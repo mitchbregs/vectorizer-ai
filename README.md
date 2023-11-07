@@ -32,11 +32,11 @@ svg.save("/path/to/output.svg")
 You can also use:
 
 ```python
-client.vectorize(image_base64="base64encodedimage==", mode="preview")
+client.vectorize(image_base64="base64encodedimage==")
 
 # or
 
-client.vectorize(image_url="https://imageurl.com/test.png", mode="test")
+client.vectorize(image_url="https://imageurl.com/test.png")
 ```
 
 ### Advanced
